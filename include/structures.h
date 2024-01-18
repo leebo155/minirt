@@ -6,7 +6,7 @@
 /*   By: bohlee <bohlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 13:02:27 by bohlee            #+#    #+#             */
-/*   Updated: 2024/01/15 14:04:25 by bohlee           ###   ########.fr       */
+/*   Updated: 2024/01/18 12:33:36 by bohlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_cylinder	t_cylinder;
 typedef struct s_formula	t_formula;
 typedef struct s_mlx_vars	t_mlx_vars;
 typedef struct s_mlx_data	t_mlx_data;
+typedef struct s_checklist	t_checklist;
 
 typedef int					t_bool;
 # define TRUE 1
@@ -179,6 +180,13 @@ struct s_mlx_vars
 	void			*mlx_ptr;
 	void			*mlx_window;
 	t_mlx_data		painting;
+};
+
+struct s_checklist
+{
+	int	camera;
+	int	ambient;
+	int	light;
 };
 
 #endif

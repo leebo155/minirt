@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INC = -Iinclude -Isrc/libft/include -Isrc/ft_printf/include -Isrc/get_next_line/include
+INC = -Iinclude -Isrc/libft/include -Isrc/ft_printf/include -Isrc/get_next_line/include -Iminilibx
 NAME = miniRT
 SRCS = src/main/main.c \
 	   src/valid/check_element.c \

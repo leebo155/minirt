@@ -6,7 +6,7 @@
 /*   By: bohlee <bohlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:21:10 by bohlee            #+#    #+#             */
-/*   Updated: 2024/01/13 13:36:47 by bohlee           ###   ########.fr       */
+/*   Updated: 2024/01/18 12:45:24 by bohlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ static t_bool	check_extension(char *file)
 	return (TRUE);
 }
 
-static t_bool	check_element(char *line, int *cam, int *amb)
+static t_bool	check_element(char *line, t_checklist *checklist)
 {
 	while (check_whitespace(line))
 		line++;
 	if (line[0] == 'A' && check_ambient(line))
-		return (++(*amb));
+		return (++(checklist->ambient));
 	else if (line[0] == 'C' && check_camera(line))
-		return (++(*cam));
+		return (++(checklist->camera));
 	else if (line[0] == 'L' && check_light(line))
-		return (TRUE);
+		return (++(checklist->light));
 	else if (line[0] == 's' && line[1] == 'p' && check_sphere(line))
 		return (TRUE);
 	else if (line[0] == 'p' && line[1] == 'l' && check_plane(line))
@@ -48,7 +48,7 @@ static t_bool	check_element(char *line, int *cam, int *amb)
 	return (FALSE);
 }
 
-static t_bool	check_format(int fd, int *cam, int *amb)
+static t_bool	check_format(int fd, t_checklist *checklist)
 {
 	char	*line;
 	int		rows;
@@ -58,7 +58,7 @@ static t_bool	check_format(int fd, int *cam, int *amb)
 	while (line)
 	{
 		rows++;
-		if (!check_empty_line(line) && !check_element(line, cam, amb))
+		if (!check_empty_line(line) && !check_element(line, checklist))
 		{
 			printf("Error: %d line does not fit the format.\n", rows);
 			while (line)
@@ -74,29 +74,35 @@ static t_bool	check_format(int fd, int *cam, int *amb)
 	return (TRUE);
 }
 
+static void	init_checklist(t_checklist *checklist)
+{
+	checklist->camera = 0;
+	checklist->ambient = 0;
+	checklist->light = 0;
+}
+
 t_bool	check_valid(char *file)
 {
-	int	fd;
-	int	camera;
-	int	ambient;
+	int			fd;
+	t_checklist	checklist;
 
-	camera = 0;
-	ambient = 0;
+	init_checklist(&checklist);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
 		perror("Error");
 		return (FALSE);
 	}
-	if (!check_extension(file) || !check_format(fd, &camera, &ambient))
+	if (!check_extension(file) || !check_format(fd, &checklist))
 	{
 		close(fd);
 		return (FALSE);
 	}
 	close(fd);
-	if (camera != 1 || ambient != 1)
+	if (checklist.camera != 1 || checklist.ambient != 1
+		|| checklist.light > 1)
 	{
-		printf("Error: Camera/ambient should be declared one each.\n");
+		printf("Error: Camera/ambient/light should be declared one each.\n");
 		return (FALSE);
 	}
 	return (TRUE);
