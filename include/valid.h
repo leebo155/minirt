@@ -6,7 +6,7 @@
 /*   By: bohlee <bohlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:57:51 by bohlee            #+#    #+#             */
-/*   Updated: 2024/01/13 13:15:04 by bohlee           ###   ########.fr       */
+/*   Updated: 2024/01/24 14:44:18 by bohlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ t_bool		check_sphere(char *line);
 t_bool		check_plane(char *line);
 t_bool		check_cylinder(char *line);
 t_bool		my_atod(char **line, double *ret);
+void		print_error(char *str);
+void		print_nbr_error(int nbr, char *str);
 
 #endif

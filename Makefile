@@ -8,6 +8,7 @@ SRCS = src/main/main.c \
 	   src/valid/check_string.c \
 	   src/valid/my_atod.c \
 	   src/valid/validation.c \
+	   src/valid/print_error.c \
 	   src/vector/constructor.c \
 	   src/vector/multiply_divide.c \
 	   src/vector/plus_minus.c \

@@ -6,7 +6,7 @@
 /*   By: bohlee <bohlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:21:10 by bohlee            #+#    #+#             */
-/*   Updated: 2024/01/18 12:45:24 by bohlee           ###   ########.fr       */
+/*   Updated: 2024/01/24 14:40:02 by bohlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_bool	check_extension(char *file)
 		|| file[filename_length - 2] != 'r'
 		|| file[filename_length - 1] != 't')
 	{
-		printf("Error: File extension is not .rt\n");
+		print_error("File extension is not .rt");
 		return (FALSE);
 	}
 	return (TRUE);
@@ -60,7 +60,7 @@ static t_bool	check_format(int fd, t_checklist *checklist)
 		rows++;
 		if (!check_empty_line(line) && !check_element(line, checklist))
 		{
-			printf("Error: %d line does not fit the format.\n", rows);
+			print_nbr_error(rows, " line does not fit the format.");
 			while (line)
 			{
 				free(line);
@@ -90,7 +90,7 @@ t_bool	check_valid(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Error");
+		perror("Error\n");
 		return (FALSE);
 	}
 	if (!check_extension(file) || !check_format(fd, &checklist))
@@ -102,7 +102,7 @@ t_bool	check_valid(char *file)
 	if (checklist.camera != 1 || checklist.ambient != 1
 		|| checklist.light > 1)
 	{
-		printf("Error: Camera/ambient/light should be declared one each.\n");
+		print_error("Camera/ambient/light should be declared one each.");
 		return (FALSE);
 	}
 	return (TRUE);

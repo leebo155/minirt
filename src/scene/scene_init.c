@@ -6,7 +6,7 @@
 /*   By: bohlee <bohlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 14:32:22 by bohlee            #+#    #+#             */
-/*   Updated: 2024/01/13 14:06:26 by bohlee           ###   ########.fr       */
+/*   Updated: 2024/01/24 14:43:03 by bohlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_bool	init_scene(int fd, t_scene **scene)
 	{
 		if (!check_empty_line(line) && !input_element(line, scene))
 		{
-			printf("Error: Failed malloc.\n");
+			print_error("Failed malloc.");
 			while (line)
 			{
 				free(line);
@@ -70,12 +70,13 @@ t_bool	create_scene(t_scene **scene, char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Error");
+		perror("Error\n");
 		return (FALSE);
 	}
 	*scene = (t_scene *)ft_calloc(1, sizeof(t_scene));
 	if (!(*scene))
 	{
+		print_error("Failed malloc.");
 		close(fd);
 		return (FALSE);
 	}

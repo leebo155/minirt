@@ -6,7 +6,7 @@
 /*   By: bohlee <bohlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:10:49 by bohlee            #+#    #+#             */
-/*   Updated: 2024/01/15 14:05:29 by bohlee           ###   ########.fr       */
+/*   Updated: 2024/01/24 14:54:11 by bohlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ int	main(int argc, char *argv[])
 	t_scene		*scene;
 	t_mlx_vars	vars;
 
-	if (argc == 1 || !check_valid(argv[1]))
+	if (argc == 1)
+	{
+		print_error("execute without arguments.");
+		return (-1);
+	}
+	if (!check_valid(argv[1]))
 		return (-1);
 	if (!create_scene(&scene, argv[1]))
 		return (-1);

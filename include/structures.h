@@ -6,7 +6,7 @@
 /*   By: bohlee <bohlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 13:02:27 by bohlee            #+#    #+#             */
-/*   Updated: 2024/01/18 12:33:36 by bohlee           ###   ########.fr       */
+/*   Updated: 2024/01/24 14:26:17 by bohlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef int					t_object_type;
 # define SN 64
 # define TOP 1
 # define BOTTOM -1
+# define STDERR 2
 
 struct	s_vec3
 {
