@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INC = -Iinclude -Isrc/libft/include -Isrc/ft_printf/include -Isrc/get_next_line/include -Iminilibx
+INC = -Iinclude -Isrc/libft/include -Isrc/ft_printf/include -Isrc/get_next_line/include -Ilib/minilibx
 NAME = miniRT
 SRCS = src/main/main.c \
 	   src/valid/check_element.c \
@@ -27,7 +27,7 @@ SRCS = src/main/main.c \
 	   src/trace/light.c \
 	   src/paint/init_mlx_vars.c \
 	   src/paint/painting.c
-LIBS = -Llib -lft -lgnl -Lminilibx -lmlx -framework OpenGL -framework Appkit
+LIBS = -Llib -lft -lgnl -Llib/minilibx -lmlx -framework OpenGL -framework Appkit
 OBJS = $(SRCS:.c=.o)
 
 .PHONY: all clean fclean re
@@ -37,7 +37,7 @@ all: $(NAME)
 clean:
 	$(MAKE) -C src/libft clean
 	$(MAKE) -C src/get_next_line clean
-	$(MAKE) -C minilibx clean
+	$(MAKE) -C lib/minilibx clean
 	rm -f $(OBJS)
 
 fclean: clean
@@ -48,20 +48,17 @@ fclean: clean
 re: fclean
 	$(MAKE) all
 
-$(NAME): $(OBJS) lib/libft.a lib/libgnl.a minilibx/libmlx.a
+$(NAME): $(OBJS) lib/libft.a lib/libgnl.a lib/minilibx/libmlx.a
 	$(CC) $(CFLAGS) $(LIBS) $(INC) -o $@ $(OBJS)
 
-lib:
-	mkdir lib
-
-lib/libft.a: lib
+lib/libft.a:
 	$(MAKE) -C src/libft all
 
-lib/libgnl.a: lib
+lib/libgnl.a:
 	$(MAKE) -C src/get_next_line all
 
-minilibx/libmlx.a:
-	$(MAKE) -C minilibx all
+lib/minilibx/libmlx.a:
+	$(MAKE) -C lib/minilibx all
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $^
