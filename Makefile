@@ -51,10 +51,13 @@ re: fclean
 $(NAME): $(OBJS) lib/libft.a lib/libgnl.a minilibx/libmlx.a
 	$(CC) $(CFLAGS) $(LIBS) $(INC) -o $@ $(OBJS)
 
-lib/libft.a: 
+lib:
+	mkdir lib
+
+lib/libft.a: lib
 	$(MAKE) -C src/libft all
 
-lib/libgnl.a:
+lib/libgnl.a: lib
 	$(MAKE) -C src/get_next_line all
 
 minilibx/libmlx.a:
