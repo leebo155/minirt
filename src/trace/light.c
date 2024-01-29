@@ -6,7 +6,7 @@
 /*   By: bohlee <bohlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:09:49 by bohlee            #+#    #+#             */
-/*   Updated: 2024/01/10 16:48:59 by bohlee           ###   ########.fr       */
+/*   Updated: 2024/01/29 14:44:19 by bohlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ t_color3	point_light_get(t_scene *scene, t_light *light)
 	reflect_dir = reflect(vdmult(l.ray.dirc, -1), scene->rec.normal);
 	specular = vdmult(vdmult(light->color, SS),
 			pow(fmax(vdot(view_dir, reflect_dir), 0.0), SN));
-	return (vdmult(vvplus(vvplus(scene->ambient, diffuse),
-				specular), light->bright_ratio * LUMEN));
+	return (vdmult(vvplus(diffuse, specular), light->bright_ratio * LUMEN));
 }
 
 t_bool	in_shadow(t_object *objs, t_ray light_ray, double light_length)
