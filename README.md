@@ -20,7 +20,7 @@
      > ∗ ambient lighting ratio in range [0.0,1.0]: 0.2   
      > ∗ R,G,B colors in range [0-255]: 255, 255, 255
      > ```shall
-     >   A  0.2  255, 255, 255
+     >       A  0.2  255, 255, 255
      > ```
   ◦ Camera:   
      > ∗ identifier: C   
@@ -28,7 +28,7 @@
      > ∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0   
      > ∗ FOV : Horizontal field of view in degrees in range [0,180]: 70
      > ```shell
-     >      C  -50.0,0,20  0,0,1  70
+     >       C  -50.0,0,20  0,0,1  70
      > ```
   ◦ Light:   
      > ∗ identifier: L   
